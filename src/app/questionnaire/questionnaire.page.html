@@ -1,0 +1,66 @@
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="!showResults">
+    <div *ngFor="let question of questions; let i = index;">
+      <ng-container *ngIf="i === count">
+        <ion-grid fixed="md">
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <h2>
+                For each question, please select the severity that best
+                describes your answer.
+              </h2>
+              <i>
+                Please rate the CURRENT (i.e. LAST 2 WEEKS) SEVERITY of your
+                insomnia problem(s).
+              </i>
+              <h1 class="ion-text-center">{{question.title}}</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="custom-slider">
+                <ngx-slider
+                  [(value)]="rangeValue"
+                  [options]="options"
+                ></ngx-slider>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="3">
+              <ion-item>
+                <ion-button (click)="incrementQuestion(i)"
+                  >{{ count + 1 }} of 7
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ng-container>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="showResults">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="4">
+          <h1>Guidelines for Scoring/Interpretation:</h1>
+          <h3>
+            Your selection for each question has been added to determine your
+            total score.
+          </h3>
+          <h4>
+            Total score categories:
+            <ul>
+              <li>0–7 = No clinically significant insomnia</li>
+              <li>8–14 = Subthreshold insomnia</li>
+              <li>15–21 = Clinical insomnia (moderate severity)</li>
+              <li>22–28 = Clinical insomnia (severe)</li>
+            </ul>
+          </h4>
+          <h2>Your total score is {{totalScore}}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+</ion-content>
